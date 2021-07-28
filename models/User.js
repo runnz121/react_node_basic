@@ -1,7 +1,7 @@
-const mongoose = require('monngose'); //몽구스 가져오기
+const mongoose = require('mongoose'); //몽구스 가져오기
 
 const userSchema = mongoose.Schema({
-    name : {
+    name: {
         type: String,
         maxlength: 50
     },
