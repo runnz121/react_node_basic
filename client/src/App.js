@@ -12,6 +12,7 @@ import {
 import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
+import Auth from './hoc/auth'; //hoc저거용 시키기 위해 import 함
 
 function App() {
   return (
@@ -27,13 +28,16 @@ function App() {
         */}
         <Switch>
         {/* 이와 같이 path를 작성할 수 도 있다(아래 작성한 login페이지 변환과 비교해보면 차이점은 컴포넌트를 직접 지정한다는 것 */}
-          <Route exact path="/" component = {LandingPage} /> 
 
-          <Route path="/login">
+        {/* hoc 적용시키기 위해 컴포넌트를 Auth(컴포넌트) 로 감싸준다 */}
+          <Route exact path="/" component ={Auth(LandingPage, null, true)} />  
+          <Route exact path="/login" component ={Auth(LoginPage,false)} />  
+
+          {/* <Route path="/login">
             <LoginPage />
-          </Route>
+          </Route> */}
 
-          <Route path="/register" component={RegisterPage}/>
+          <Route path="/register" component={Auth(RegisterPage,false)}/>
         </Switch>
       </div>
     </Router>

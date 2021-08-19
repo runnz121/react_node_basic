@@ -2,13 +2,13 @@
 
 const express = require('express')
 const app = express()
-const port = 5000
+
 const bodyParser = require('body-parser'); //통신을 위해 설치한 body-parser를 가져옴(request body로 클라이언트에게 전달할 정보를 받아줌)
 const cookieParser = require('cookie-parser') //쿠키에 토큰을 저장하기 위해 Cookie-parser 라이브러리 설치후 가져옴 
 
-const {auth} = require('./server/middleware/auth') //auth를 가져옴
-const {User} = require("./server/models/User");// 몽고 db로 설정한 값을 가져옴
-const config = require('./server/config/key'); //몽고db 비밀번호를 저장해 놓은 위치에서 가져옴
+const {auth} = require('./middleware/auth') //auth를 가져옴
+const {User} = require("./models/User");// 몽고 db로 설정한 값을 가져옴
+const config = require('./config/key'); //몽고db 비밀번호를 저장해 놓은 위치에서 가져옴
 
 
 //application/x-www-form-urlencoded => 형태의 신호를 분석해서 가져오는 부분
@@ -28,17 +28,13 @@ mongoose.connect(config.mongoURI, { //mongoose를 통해 mongodb와의 연결
 
 app.get('/', (req, res) => res.send('Hello World!~~ '))
 
-app.get('/api/hello', (req, res) => {
-  res.send('Hello World! ㅎㅎㅎdggㅎ')
-})
+// app.get('/api/hello', (req, res) => {
+//   res.send('Hello World! ㅎㅎㅎdggㅎ')
+// })
 
-
-app.get('/api/hello', (req, res) => {
-  res.send("안녕하세요");
-})
-
-
-
+app.get('/api/hello', (req, res) => 
+  res.send("안녕하세요")
+)
 
 
 
@@ -125,8 +121,8 @@ app.post('/api/users/login', (req, res) => { //login 구현
 
 
 
-
+  const port = 5000
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://localhost:${port}!`)
 })

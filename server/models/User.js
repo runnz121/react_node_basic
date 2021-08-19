@@ -52,8 +52,8 @@ userSchema.methods.comparePassword = function(plainPassword, cb) {
     //plainpassword 1234567   암호화된 비밀번호 2b$10$Rfo0Yt30w0udqZwUQLPekOuRX1g/BF3M2e0FO4Ahi1xtRNpzgEZl 이 2개가 서로 같은지 체크해야됨
     // => 따라서 Plainpassword를 암호화 해서 비교한다(복호화는 불가)
     bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
-        if(err) return cb(err), //에러가 있으면 콜벡에 에러 담아서 리턴
-            cb(null, isMatch) //맞다면 에러는 null이고 맞는 비밀번호 담아 콜벡에 전달
+        if(err) return cb(err); //에러가 있으면 콜벡에 에러 담아서 리턴
+            cb(null, isMatch); //맞다면 에러는 null이고 맞는 비밀번호 담아 콜벡에 전달
     })
 }
 
@@ -85,7 +85,7 @@ userSchema.statics.findByToken = function ( token, cb) {
         //몽고Db 메소드 : findOne
         user.findOne({"_id" : decoded, "token": token}, function(err, user){
 
-            if(err) return cb(err)
+            if(err) return cb(err);
             cb(null, user)
         })
     })
